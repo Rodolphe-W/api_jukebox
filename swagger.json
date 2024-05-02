@@ -17,7 +17,7 @@
         },
         "servers": [
             {
-                "url": "http://localhost:3000/api/v1"
+                "url": "https://api-jukebox.onrender.com/api/v1"
             }
         ],
         "components": {
@@ -159,6 +159,114 @@
                     "responses": {
                         "200": {
                             "description": "music when id it ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/responseMusic"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Error music not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "405": {
+                            "description": "Error param is not a number",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Delete music in database by id",
+                    "tags": [
+                        "music"
+                    ],
+                    "parameters": [
+                        {
+                            "in": "path",
+                            "name": "id",
+                            "schema": {
+                                "type": "integer"
+                            },
+                            "required": true,
+                            "description": "Id of the music"
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "When delete it ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/responseMusic"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Error music not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "405": {
+                            "description": "Error param is not a number",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Update music by id",
+                    "tags": [
+                        "music"
+                    ],
+                    "parameters": [
+                        {
+                            "in": "path",
+                            "name": "id",
+                            "schema": {
+                                "type": "integer"
+                            },
+                            "required": true,
+                            "description": "Id of the music"
+                        }
+                    ],
+                    "requestBody": {
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/music"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "When update it ok",
                             "content": {
                                 "application/json": {
                                     "schema": {
