@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express()
 const port = 3000
 const version = "v1"
@@ -8,6 +9,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const options = require('./swagger.json');
 const specs = swaggerJsdoc(options);
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(`/api/${version}`, router);

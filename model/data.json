@@ -4,13 +4,23 @@
         "cover": "lose_control_cover.jpg",
         "sound": "Teddy_Swims-Lose_Control.mp3",
         "title": "Lose Control",
-        "category": "pop"
+        "artist": "Teddy Swims",
+        "category": "Pop"
     },
     {
         "id": 2,
         "cover": "the_sound_of_silence_cover.jpg",
         "sound": "Disturbed-The_Sound_Of_Silence.mp3",
         "title": "The Sound of Silence",
-        "category": "pop"
+        "artist": "Disturbed",
+        "category": "Pop"
+    },
+    {
+        "id": 3,
+        "cover": "DepecheModeEnjoyTheSilenceCover.jpg",
+        "sound": "Depeche_Mode-Enjoy_The_Silence.mp3",
+        "title": "Enjoy The Silence",
+        "artist": "Depeche Mode",
+        "category": "Synthpop"
     }
 ]
