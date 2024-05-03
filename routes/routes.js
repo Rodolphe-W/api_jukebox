@@ -4,6 +4,7 @@ const controllerMusic = require('./../controller/Music');
 const {random} = require('./../controller/Music');
 const multer = require('multer');
 const fs = require('fs');
+const { error } = require('console');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         if(file.fieldname == "sound"){
@@ -66,6 +67,22 @@ const updateStorage = multer.diskStorage({
         
     }
 });
+
+const auth = (req,res,next)=>{
+    const bearerHeader = req.headers['authorization'];
+    if(typeof bearerHeader !== 'undefined'){
+        const bearer = bearerHeader.split(' ');
+        const bearerToken = bearer[1];
+
+        if(bearerToken == process.env.TOKEN){
+            next();
+        } else {
+            return res.status(403).json({error: "Invalid token"});
+        }
+    } else {
+        return res.status(403).json({error: "Invalid token"});
+    }
+}
   
 const upload = multer({ storage: storage });
 const update = multer({ storage: updateStorage })
@@ -80,16 +97,16 @@ router.post('/', (req, res) => {
 
 
 router.get('/music', controllerMusic.find);
-router.post('/music',upload.fields([{name: 'sound'},{name: 'cover'}]), controllerMusic.create);
+router.post('/music',auth, upload.fields([{name: 'sound'},{name: 'cover'}]), controllerMusic.create);
 router.get('/music/random', random);
 router.get('/music/:id', controllerMusic.findById);
-router.delete('/music/:id', controllerMusic.delete);
+router.delete('/music/:id', auth,controllerMusic.delete);
 
 
 //router.put('/music/:id', update.fields([{name: 'sound'},{name: 'cover'}]) , controllerMusic.update);
 
 const updateFiles = update.fields([{name: 'sound'},{name: 'cover'}]);
-router.put('/music/:id', function(req,res){
+router.put('/music/:id',auth, function(req,res){
     updateFiles(req,res,function(err){
         if (err) {
             return res.status(err.code).send({ error: err.message });

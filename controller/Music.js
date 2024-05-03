@@ -40,7 +40,7 @@ const controllerMusic = {
         if(!req.files.cover || !req.files.sound || !req.body.title || !req.body.category || !req.body.artist) {
             return res.status(400).json({error: `One or more param are not found (${(!req.files.cover) ? 'cover,' : ''} ${(!req.files.sound) ? 'sound,' : ''} ${(!req.body.title) ? 'title,' : ''} ${(!req.body.category) ? 'category' : ''}) ${(!req.body.artist) ? 'artist' : ''}`})
         }
-        const nextAutoIncrementValue = await sequelize.query("SELECT seq FROM sqlite_sequence WHERE name='musics'", { raw: true });
+        const nextAutoIncrementValue = await sequelize.query("SELECT seq FROM sqlite_sequence WHERE name='Music'", { raw: true });
         const id = nextAutoIncrementValue[0][0].seq+1;
         const musicAdd = await Music.create(
             {
@@ -68,7 +68,7 @@ const controllerMusic = {
             return res.status(400).json({error: `One or more param are not found (${(!req.body.title) ? 'title,' : ''} ${(!req.body.artist) ? 'artist,' : ''} ${(!req.body.category) ? 'category' : ''})`});
         }
 
-        const updateObject = { title: req.body.title, category: req.body.category };
+        const updateObject = { title: req.body.title, category: req.body.category, artist: req.body.artist };
 
         if(req.files.cover)
             updateObject['cover'] = `${id}-${req.files.cover[0].originalname}`;

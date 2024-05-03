@@ -4,8 +4,8 @@
   "description": "",
   "main": "serveur.js",
   "scripts": {
-    "dev": "nodemon serveur.js",
-    "start": "node serveur.js"
+    "dev": "nodemon --env-file=.env serveur.js",
+    "start": "node --env-file=.env serveur.js"
   },
   "author": "",
   "license": "ISC",
